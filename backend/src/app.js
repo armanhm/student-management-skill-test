@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const { handle404Error, handleGlobalError, syncConfigHandler } = require("./middlewares");
+const { handle404Error, handleGlobalError } = require("./middlewares");
 const { v1Routes } = require("./routes/v1");
 const { cors } = require("./config");
 const path = require("path");
@@ -18,6 +18,5 @@ app.use("/api/v1", v1Routes);
 
 app.use(handle404Error);
 app.use(handleGlobalError);
-syncConfigHandler()
 
 module.exports = { app };

@@ -1,5 +1,4 @@
 const { ApiError } = require("./api-error");
-const { executeHandler }=require("./executeHandler");
 const { generateToken, verifyToken } = require("./jwt-handle");
 const { processDBRequest } = require("./process-db-request");
 const { generateCsrfHmacHash, verifyCsrfToken } = require("./csrf-handle");
@@ -20,7 +19,6 @@ const { formatMyPermission } = require("./format-my-permission");
 
 module.exports = {
     ApiError,
-    executeHandler,
     verifyToken,
     generateToken,
     processDBRequest,
