@@ -35,7 +35,7 @@ const addNewStudent = async (payload) => {
     try {
         const result = await addOrUpdateStudent(payload);
         if (!result.status) {
-            throw new ApiError(500, result.message);
+            throw new ApiError(400, result.message);
         }
 
         try {
@@ -45,6 +45,10 @@ const addNewStudent = async (payload) => {
             return { message: ADD_STUDENT_AND_BUT_EMAIL_SEND_FAIL }
         }
     } catch (error) {
+        // Surface known business errors (e.g. "Email already exists") instead of masking them as a generic 500.
+        if (error instanceof ApiError) {
+            throw error;
+        }
         throw new ApiError(500, "Unable to add student");
     }
 }

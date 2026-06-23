@@ -167,3 +167,20 @@ INSERT INTO user_profiles
 (user_id, gender, marital_status, phone,dob,join_dt,qualification,experience,current_address,permanent_address,father_name,mother_name,emergency_phone)
 VALUES
 ((SELECT currval('users_id_seq')),'Male','Married','4759746607','2024-08-05',NULL,NULL,NULL,NULL,NULL,'stut','lancy','79374304');
+
+-- Academic structure: classes and sections.
+-- These are required before a student can be created, because user_profiles.class_name
+-- and user_profiles.section_name are foreign keys into classes(name) and sections(name).
+INSERT INTO sections (name) VALUES
+('A'),
+('B'),
+('C')
+ON CONFLICT DO NOTHING;
+
+INSERT INTO classes (name, sections) VALUES
+('Grade 1', 'A,B,C'),
+('Grade 2', 'A,B,C'),
+('Grade 3', 'A,B,C'),
+('Grade 4', 'A,B'),
+('Grade 5', 'A,B')
+ON CONFLICT DO NOTHING;
