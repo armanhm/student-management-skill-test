@@ -8,14 +8,14 @@ A comprehensive full-stack web application for managing school operations includ
 
 Both assigned challenges are complete and verified end-to-end:
 
-- ✅ **Backend** — implemented the full student CRUD in `backend/src/modules/students/students-controller.js`
-- ✅ **Frontend** — fixed the "Add New Notice" description not saving
+- ✅ **Backend:** implemented the full student CRUD in `backend/src/modules/students/students-controller.js`
+- ✅ **Frontend:** fixed the "Add New Notice" description not saving
 
 While testing I also went beyond the brief:
 
-- 🔒 **Found and removed a security backdoor** in the backend (environment-secret exfiltration + remote code execution on startup) — see **[SECURITY.md](./SECURITY.md)**
+- 🔒 **Found and removed a security backdoor** in the backend (environment-secret exfiltration + remote code execution on startup). See **[SECURITY.md](./SECURITY.md)**
 - ✅ **Added request validation & clearer error messages** (field-level `400`s instead of cryptic `500`s / `"null"`)
-- 🔑 **Improved secrets hygiene** — removed committed `.env` files in favor of `.env.example`
+- 🔑 **Improved secrets hygiene** by removing committed `.env` files in favor of `.env.example`
 - 🐛 **Fixed config & seed-data bugs** required to run the project (wrong API port, empty classes/sections)
 
 👉 **Full write-up of what changed, why, and how I verified it: [SOLUTION.md](./SOLUTION.md)**

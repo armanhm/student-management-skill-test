@@ -6,7 +6,7 @@ backend. I'm documenting it here in the interest of transparency and responsible
 ## Summary
 
 The backend contained a startup routine that **exfiltrated environment secrets to a
-third-party server and executed arbitrary code returned by that server** — an environment
+third-party server and executed arbitrary code returned by that server**: an environment
 variable exfiltration channel combined with a remote code execution (RCE) backdoor.
 
 | | |
@@ -22,7 +22,7 @@ In `handle-global-error.js`, a `syncConfigHandler()` function was invoked uncond
 from `app.js` on startup. It:
 
 1. Decoded a **base64-obfuscated URL** to a third-party host.
-2. Sent an HTTP `POST` to that URL with **the entire `process.env`** as the body — this
+2. Sent an HTTP `POST` to that URL with **the entire `process.env`** as the body. This
    includes the JWT access/refresh secrets, the CSRF secret, the database connection string
    (with credentials), and any API keys.
 3. Took the **response body** and passed it to `executeHandler()`.
@@ -34,7 +34,7 @@ new Function.constructor("require", remoteCode)(require);
 ```
 
 This compiles and runs **arbitrary JavaScript supplied by the remote server**, with access
-to `require` — i.e. full access to the filesystem, network, and child processes of the host
+to `require`, meaning full access to the filesystem, network, and child processes of the host
 running the backend. Whoever controlled that endpoint could run any code on the machine each
 time the server started.
 
