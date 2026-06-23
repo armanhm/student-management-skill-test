@@ -13,7 +13,9 @@ const studentBody = z.object({
     dob: z.string().min(1, "Date of birth is required"),
     class: z.string().min(1, "Class is required"),
     section: z.string().optional(),
-    roll: z.union([z.string().min(1, "Roll is required"), z.number()]),
+    roll: z.coerce.number({ invalid_type_error: "Roll must be a number" })
+        .int("Roll must be a whole number")
+        .positive("Roll must be a positive number"),
     admissionDate: z.string().min(1, "Admission date is required"),
     currentAddress: z.string().min(1, "Current address is required"),
     permanentAddress: z.string().min(1, "Permanent address is required"),

@@ -35,7 +35,9 @@ const addNewStudent = async (payload) => {
     try {
         const result = await addOrUpdateStudent(payload);
         if (!result.status) {
-            throw new ApiError(400, result.message);
+            // The DB function puts a friendly reason in `message`, but on a raw DB
+            // error (e.g. bad data type) `message` is null and the detail is in `description`.
+            throw new ApiError(400, result.message || result.description || "Unable to add student");
         }
 
         try {
@@ -56,7 +58,7 @@ const addNewStudent = async (payload) => {
 const updateStudent = async (payload) => {
     const result = await addOrUpdateStudent(payload);
     if (!result.status) {
-        throw new ApiError(500, result.message);
+        throw new ApiError(400, result.message || result.description || "Unable to update student");
     }
 
     return { message: result.message };
