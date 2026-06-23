@@ -7,13 +7,13 @@ const idParam = z.object({
 // Mirrors the fields the frontend student form submits (see student-schema.ts on the client).
 const studentBody = z.object({
     name: z.string().min(1, "Name is required"),
-    email: z.string().min(1, "Email is required").email("A valid email is required"),
+    email: z.string().min(1, "Email is required"),
     gender: z.string().min(1, "Gender is required"),
     phone: z.string().min(1, "Phone is required"),
     dob: z.string().min(1, "Date of birth is required"),
     class: z.string().min(1, "Class is required"),
     section: z.string().optional(),
-    roll: z.coerce.number({ invalid_type_error: "Roll must be a number" }).int("Roll must be a number"),
+    roll: z.union([z.string().min(1, "Roll is required"), z.number()]),
     admissionDate: z.string().min(1, "Admission date is required"),
     currentAddress: z.string().min(1, "Current address is required"),
     permanentAddress: z.string().min(1, "Permanent address is required"),
